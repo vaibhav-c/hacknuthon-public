@@ -1,0 +1,211 @@
+ {% extends "layouts/base.html" %} {% block title %} {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Noto Sans', sans-serif
+    }
+    
+    html,
+    body {
+        height: 100%
+    }
+    
+    body {
+        display: grid;
+        place-items: center;
+        background: #AB47BC
+    }
+    
+    .card {
+        color: #fff;
+        width: 350px;
+        border-radius: 10px;
+        background: linear-gradient(145deg, #9a40a9, #b74cc9);
+        box-shadow: 20px 20px 60px #913ca0, -20px -20px 60px #c552d8;
+        border: none
+    }
+    
+    .neo-button {
+        width: 40px;
+        height: 40px;
+        outline: 0 !important;
+        cursor: pointer;
+        color: #fff;
+        font-size: 15px;
+        border: none;
+        margin-right: 10px;
+        border-radius: 50%;
+        background: linear-gradient(145deg, #9a40a9, #b74cc9);
+        box-shadow: inset 20px 20px 60px #913ca0, inset -20px -20px 60px #c552d8
+    }
+    
+    .num {
+        color: #eee !important
+    }
+    
+    .line {
+        color: #fff
+    }
+    
+    .neo-button:active {
+        border-radius: 50%;
+        background: #AB47BC;
+        box-shadow: 28px 28px 57px #933da2, -28px -28px 57px #c351d6
+    }
+    
+    .fa-facebook {
+        color: #3b5998
+    }
+    
+    .fa-linkedin {
+        color: #0077b5
+    }
+    
+    .fa-google {
+        color: #dc4e41
+    }
+    
+    .fa-youtube {
+        color: #cd201f
+    }
+    
+    .fa-twitter {
+        color: #55acee
+    }
+    
+    .profile_button {
+        color: #fff;
+        padding: 10px;
+        border: none;
+        outline: 0 !important;
+        border-radius: 50px;
+        background: #AB47BC;
+        box-shadow: 28px 28px 57px #933da2, -28px -28px 57px #c351d6
+    }
+    
+    .people li {
+        display: inline;
+        white-space: nowrap
+    }
+</style>
+{% block stylesheets %}{% endblock stylesheets %} {% block content %}
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <!-- [ breadcrumb ] start -->
+        <!-- [ breadcrumb ] end -->
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- [ Main Content ] start -->
+                <div class="container d-flex justify-content-lg-start col-12">
+                    <div class="card p-3 py-4">
+                        <div class="text-center"> <img src="/static/assets/images/user/avatar-3.jpg" width="100" class="rounded-circle">
+                            <h3 class="mt-2">{{allData["extra"]}}</h3> <span class="mt-1 clearfix">level {{allData["job_level"]}} employee in {{allData["department"]}} department</span>
+                            <div class="row mt-3 mb-3">
+                                <div class="col-md-6">
+                                    <h5>Years at company</h5> <span class="num">{{allData["YearsAtCompany"]}}</span>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <h5>Points</h5> <span class="num">{{allData["SkillPointEarned"]}}</span>
+                                </div>
+                            </div>
+
+                            <hr class="line"> <span class="mt-2 clearfix">{{Description}} Hi this is {{allData["extra"]}}, welcome to my profile. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
+                            <br><br><br><br><br>
+                            <button type="button" class="btn btn-primary" title="btn btn-primary" data-toggle="tooltip"><a href="mailto:{{allData['email']}}" style="color: white;">Contact me</a></button>
+                        </div>
+
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Trophies</h5>
+                        </div>
+                        <br>
+                        <div class="row">
+
+                            <script>
+                                //let awards = ['{{fitnesstrophy}}', '{{eventtrophy}}', '{{m1trophy}}', '{{m6trophy}}', '{{medaltrophy}}'];
+                                var allData = JSON.parse('{{allData | tojson}}');
+                                var ecount = parseInt('{{ecount}}')
+                                    //console.log(ecount)
+                                x = 0
+                                y = 0
+                                awards = [1, 0, 1, 0, 0];
+                                //console.log("this")
+                                //console.log(allData['OffsThisMonth'])
+                                if (allData['SkillPointEarned'] > 500)
+                                    awards[4] = 1
+                                if (allData['YearsAtCompany'] > 4)
+                                    awards[3] = 1
+                                if (allData['OffsThisMonth'] > 0)
+                                    awards[2] = 0
+                                if (ecount > 2)
+                                    awards[1] = 1
+
+                                if (parseInt(awards[0]) > 0) {
+                                    document.write('<br><br><br><br><br><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/static/assets/images/trophies/fitness.png" width="80" > {{fitnesstropy}} rewarded for 50 courses</div>');
+                                } else {
+                                    document.write('<br><br><br><br><br><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/static/assets/images/trophies/notrophy.png" width="80" >pending, rewarded for completing 50 courses</div>')
+                                }
+                                if (parseInt(awards[1]) > 0) {
+                                    document.write('<br><br><br><br><br><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/static/assets/images/trophies/events.png" width="80" > {{eventtrophy}} rewarded for 3 events </div>');
+                                } else {
+                                    document.write('<br><br><br><br><br><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/static/assets/images/trophies/notrophy.png" width="80" >pending, rewarded for 3 events </div>')
+                                }
+                                if (parseInt(awards[2]) > 0) {
+                                    document.write('<br><br><br><br><br><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/static/assets/images/trophies/starfor1m.png" width="80" > {{m1trophy}} rewarded for No Off in the month</div>');
+                                } else {
+                                    document.write('<br><br><br><br><br><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/static/assets/images/trophies/notrophy.png" width="80" >rewarded for No Off in the month</div>')
+                                }
+                                
+                                if (parseInt(awards[4]) > 0) {
+                                    document.write('<br><br><br><br><br><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/static/assets/images/trophies/medal.png" width="80" > {{medaltrophy}} rewarded for getting 500 points</div>');
+                                } else {
+                                    document.write('<br><br><br><br><br><div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/static/assets/images/trophies/notrophy.png" width="80" >pending, rewarded for getting 500 points</div>')
+                                }
+                            </script>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Skills : </h5>
+                                <br><br>
+                                <h6>
+                                    {% for x in allData["skills"]["skills"] %} {{ x + ','}} {% endfor %}
+                                </h6>
+                            </div>
+                            <div class="row mt-3 mb-3" style="text-align: center;">
+                                <div class="col-md-6">
+                                    <h5>Courses in Progress</h5> <span class="num">{{doing | length}}</span>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <h5>Courses Completed</h5> <span class="num">{{done | length}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %} {% endblock javascripts %}
